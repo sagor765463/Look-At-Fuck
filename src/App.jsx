@@ -14,6 +14,8 @@ import ProductDetail from '@/pages/ProductDetail';
 import About from '@/pages/About';
 import Login from '@/pages/Login';
 import Register from '@/pages/Register';
+import Checkout from '@/pages/Checkout';
+import Dashboard from '@/pages/Dashboard';
 import { CartProvider } from '@/lib/cart-context';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import Admin from '@/pages/Admin';
@@ -52,6 +54,12 @@ const AuthenticatedApp = () => {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/checkout" element={<Checkout />} />
+      </Route>
+      <Route element={<ProtectedRoute />}>
+        <Route element={<Layout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Route>
       <Route element={<ProtectedRoute requireAdmin={true} />}>
         <Route element={<Layout />}>

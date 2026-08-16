@@ -145,6 +145,13 @@ export const apiClient = {
                     (b.created_date || '').localeCompare(a.created_date || '')
                 ).slice(0, limitNum);
             },
+            filterByEmail: async (email) => {
+                const snapshot = await get(ref(db, 'orders'));
+                const arr = snapToArray(snapshot);
+                return arr
+                    .filter(o => o.customer_email === email)
+                    .sort((a, b) => (b.created_date || '').localeCompare(a.created_date || ''));
+            },
             create: async (data) => {
                 const newRef = push(ref(db, 'orders'));
                 const payload = {

@@ -47,7 +47,7 @@ export default function Navbar() {
         {/* Desktop Auth Links */}
         <div className="hidden md:flex items-center gap-2 ml-4">
           {isAuthenticated ? (
-            <Button variant="outline" size="sm" onClick={() => logout()}>Logout</Button>
+            <Button variant="outline" size="sm" asChild><Link to={user?.role === 'admin' ? '/admin' : '/dashboard'}>My Account</Link></Button>
           ) : (
             <>
               <Button variant="ghost" size="sm" asChild><Link to="/login">Login</Link></Button>
@@ -78,9 +78,9 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="border-t border-border md:hidden">
+        <div className="border-t border-border md:hidden bg-background">
           <div className="mx-auto max-w-7xl space-y-2 px-4 py-3">
-            <form onSubmit={submit} className="relative">
+            <form onSubmit={submit} className="relative mb-4">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input value={q} onChange={e => setQ(e.target.value)} placeholder="Search products…" className="bg-muted/50 pl-9" />
             </form>
@@ -93,7 +93,7 @@ export default function Navbar() {
               {isAuthenticated ? (
                 <>
                   <div className="px-3 py-2 text-sm font-medium text-muted-foreground">Signed in as {user?.email}</div>
-                  <button onClick={() => { logout(); setOpen(false); }} className="block w-full text-left rounded-md px-3 py-2 text-sm font-medium text-red-500 hover:text-red-600">Logout</button>
+                  <Link to={user?.role === 'admin' ? '/admin' : '/dashboard'} onClick={() => setOpen(false)} className="block w-full text-left rounded-md px-3 py-2 text-sm font-medium hover:text-primary">My Account</Link>
                 </>
               ) : (
                 <>
